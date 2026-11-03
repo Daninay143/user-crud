@@ -1,0 +1,11 @@
+ion-router-outlet {
+  pointer-events: none;
+}
+
+ion-router-outlet > .ion-page {
+  pointer-events: auto !important;
+}
+
+ion-tab-bar {
+  display: none !important;
+}

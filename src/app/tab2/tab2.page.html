@@ -1,0 +1,238 @@
+<ion-header>
+  <ion-toolbar>
+
+    <div class="cafe-header">
+
+      <div class="brand-section">
+
+        <div class="brand-icon">
+          <ion-icon name="cafe-outline"></ion-icon>
+        </div>
+
+        <div class="brand-text">
+          <h1>Dani’s Café</h1>
+          <p>Product & Stock Manager</p>
+        </div>
+
+      </div>
+
+      <div class="header-buttons">
+
+        <ion-button
+          class="header-button"
+          fill="clear"
+          routerLink="/tabs/tab2">
+
+          <ion-icon
+            slot="start"
+            name="list-outline">
+          </ion-icon>
+
+          Menu List
+
+        </ion-button>
+
+        <ion-button
+          class="header-button"
+          fill="clear"
+          routerLink="/tabs/tab1">
+
+          <ion-icon
+            slot="start"
+            name="add-outline">
+          </ion-icon>
+
+          Add Product
+
+        </ion-button>
+
+      </div>
+
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="content-wrapper">
+
+    <div class="search-container">
+
+      <ion-searchbar
+        placeholder="Search menu item..."
+        [(ngModel)]="searchTerm"
+        (ionInput)="searchProduct($event)">
+      </ion-searchbar>
+
+      <ion-button
+        fill="clear"
+        class="refresh-button"
+        (click)="refreshProductsFromButton()">
+
+        <ion-icon
+          slot="icon-only"
+          name="refresh-outline">
+        </ion-icon>
+
+      </ion-button>
+
+    </div>
+
+
+    <ion-segment
+      [value]="selectedFilter"
+      (ionChange)="segmentChanged($event)">
+
+      <ion-segment-button value="all">
+        <ion-label>ALL</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="available">
+        <ion-label>AVAILABLE</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="lowstock">
+        <ion-label>LOW STOCK</ion-label>
+      </ion-segment-button>
+
+    </ion-segment>
+
+
+    <ion-refresher
+      slot="fixed"
+      (ionRefresh)="doRefresh($event)">
+
+      <ion-refresher-content
+        pullingIcon="refresh-outline"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+
+    </ion-refresher>
+
+
+    <div
+      class="product-list"
+      *ngIf="filteredProducts.length > 0">
+
+      <ion-item-sliding
+        *ngFor="let product of filteredProducts">
+
+        <ion-item class="product-card">
+
+          <div class="product-icon">
+
+            <ion-icon name="cafe-outline"></ion-icon>
+
+          </div>
+
+
+          <ion-label>
+
+            <h2>
+              {{ product.productName }}
+            </h2>
+
+            <div class="product-info">
+
+              <span>
+                Price: ₱{{ product.price }}
+              </span>
+
+              <span>
+                Quantity: {{ product.quantity }}
+              </span>
+
+            </div>
+
+          </ion-label>
+
+
+          <div class="stock-status">
+
+            <span
+              *ngIf="product.quantity > 5"
+              class="in-stock">
+              In Stock
+            </span>
+
+            <span
+              *ngIf="
+                product.quantity > 0 &&
+                product.quantity <= 5
+              "
+              class="low-stock">
+              Low Stock
+            </span>
+
+            <span
+              *ngIf="product.quantity === 0"
+              class="out-stock">
+              Out of Stock
+            </span>
+
+          </div>
+
+
+          <ion-button
+            class="update-button"
+            fill="solid"
+            (click)="updateProduct(product)">
+
+            <ion-icon
+              slot="start"
+              name="create-outline">
+            </ion-icon>
+
+            Update
+
+          </ion-button>
+
+
+          <ion-button
+            class="delete-button"
+            fill="clear"
+            color="medium"
+            (click)="deleteProduct(product.id)">
+
+            <ion-icon
+              slot="icon-only"
+              name="trash-outline">
+            </ion-icon>
+
+          </ion-button>
+
+        </ion-item>
+
+
+        <ion-item-options side="end">
+
+          <ion-item-option
+            color="danger"
+            (click)="deleteProduct(product.id)">
+
+            Delete
+
+          </ion-item-option>
+
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+    </div>
+
+
+    <div
+      *ngIf="filteredProducts.length === 0"
+      class="empty-message">
+
+      <p>No products yet.</p>
+
+    </div>
+
+  </div>
+
+</ion-content>

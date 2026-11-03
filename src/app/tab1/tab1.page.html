@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar class="cafe-header">
+
+    <div class="brand">
+      <div class="brand-icon">
+        <ion-icon name="cafe-outline"></ion-icon>
+      </div>
+
+      <div>
+        <div class="brand-name">Dani’s Café</div>
+        <div class="brand-subtitle">Product & Stock Manager</div>
+      </div>
+    </div>
+
+    <ion-buttons slot="end">
+      <ion-button
+        routerLink="/tabs/tab2"
+        class="header-button">
+
+        <ion-icon
+          slot="start"
+          name="list-outline">
+        </ion-icon>
+
+        Menu List
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="cafe-content">
+
+  <div class="form-wrapper">
+
+    <div class="form-card">
+
+      <div class="form-heading">
+
+        <div class="heading-icon">
+          <ion-icon name="cafe-outline"></ion-icon>
+        </div>
+
+        <div>
+          <h1>Add New Product</h1>
+          <p>Enter product details to add to your café menu.</p>
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+
+      <div class="field">
+
+        <label>PRODUCT NAME</label>
+
+        <ion-item class="input-item">
+          <ion-icon
+            slot="start"
+            name="cafe-outline">
+          </ion-icon>
+
+          <ion-input
+            type="text"
+            placeholder="e.g. Vanilla Cold Brew"
+            [(ngModel)]="newProduct.productName">
+          </ion-input>
+        </ion-item>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>PRICE (₱)</label>
+
+        <ion-item class="input-item">
+          <ion-icon
+            slot="start"
+            name="cash-outline">
+          </ion-icon>
+
+          <ion-input
+            type="number"
+            placeholder="e.g. 120"
+            [(ngModel)]="newProduct.price">
+          </ion-input>
+        </ion-item>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>STOCK QUANTITY</label>
+
+        <ion-item class="input-item">
+          <ion-icon
+            slot="start"
+            name="cube-outline">
+          </ion-icon>
+
+          <ion-input
+            type="number"
+            placeholder="e.g. 10"
+            [(ngModel)]="newProduct.quantity">
+          </ion-input>
+        </ion-item>
+
+      </div>
+
+
+      <ion-button
+        expand="block"
+        class="add-button"
+        (click)="addProduct()">
+
+        <ion-icon
+          slot="start"
+          name="add-circle-outline">
+        </ion-icon>
+
+        ADD PRODUCT TO MENU
+
+      </ion-button>
+
+    </div>
+
+  </div>
+
+</ion-content>
